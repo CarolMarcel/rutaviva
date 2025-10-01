@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "corsheaders",
-    "api",
+    "api.apps.ApiConfig",
 ]
 
 MIDDLEWARE = [
@@ -78,6 +78,12 @@ LANGUAGE_CODE = "es-cl"
 TIME_ZONE = "America/Santiago"
 USE_I18N = True
 USE_TZ = True
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    }
+}
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"

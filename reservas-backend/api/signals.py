@@ -1,9 +1,15 @@
+# reservas-backend/api/signals.py
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from .models import Profile
+
+from .models import Perfil  # <-- antes decía Profile
 
 @receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
+def ensure_perfil_exists(sender, instance, created, **kwargs):
+    """
+    Crea automáticamente un Perfil para cada usuario nuevo.
+    Si ya existe, no hace nada.
+    """
     if created:
-        Profile.objects.create(user=instance)
+        Perfil.objects.get_or_create(user=instance)
