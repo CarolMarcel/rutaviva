@@ -12,6 +12,8 @@ from .serializers import UserSerializer, EventoSerializer, ReservaSerializer, To
 from .permissions import IsAdmin
 from .email_adapter import enviar_correo
 from .tokens import generar_token
+from rest_framework import generics, permissions
+
 
 
 @api_view(["GET"])

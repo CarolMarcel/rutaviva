@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db import models, transaction
+from django.utils import timezone
+
 
 # -----------------------------
 # Perfil y BlackList

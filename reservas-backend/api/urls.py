@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (me, register, login_jwt, eventos_list, evento_crud_admin, crear_reserva, aprobar_rechazar_reserva, confirmar_reserva,
-    reservas_admin, blacklist_toggle, asignacion_upsert, health, mis_reservas, cancelar_reserva)
+    reservas_admin, blacklist_toggle, asignacion_upsert, health, mis_reservas, cancelar_reserva, TourListView, TourDetailView)
 
 urlpatterns = [
     path("health/", health),

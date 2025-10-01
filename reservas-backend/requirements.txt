@@ -4,3 +4,9 @@ djangorestframework-simplejwt==5.3.1
 django-cors-headers==4.4.0
 python-dotenv==1.0.1
 mysqlclient==2.2.4
+# Servidor WSGI para producción
+gunicorn==21.2.0  
+
+# Para servir archivos estáticos en producción
+whitenoise==6.6.0
+
