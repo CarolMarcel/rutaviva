@@ -158,3 +158,62 @@ a:hover { text-decoration: underline; }
 .modal__backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; padding: 1rem; z-index: 50; }
 .modal { width: min(480px, 96%); background: #0f172a; border: 1px solid #1f2937; border-radius: .8rem; padding: 1rem; }
 .modal__actions { display: flex; justify-content: flex-end; gap: .6rem; margin-top: .6rem; }
+
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #009688, #3f51b5);
+}
+
+.login-form {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.login-form h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.login-form p {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.login-form button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  background: #3f51b5;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background: #303f9f;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}

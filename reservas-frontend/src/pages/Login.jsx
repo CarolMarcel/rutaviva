@@ -1,40 +1,66 @@
 import { useState } from "react";
-import api, { baseURL } from "../services/api";
+import api from "../services/api"; // tu instancia de axios
+import "../styles/login.css"; // opcional para estilos
 
 export default function Login() {
-  const [u,setU]=useState(""); const [p,setP]=useState(""); const [err,setErr]=useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const submit = async (e) => {
-  e.preventDefault();
-  setErr("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-  try {
-    const { data: tok } = await api.post("/auth/token/", { username: u, password: p });
-    localStorage.setItem("rv_token", tok.access);
+    if (!username || !password) {
+      setError("Debes completar ambos campos.");
+      return;
+    }
 
-    // obtener perfil para rol
-    const { data: me } = await api.get("/auth/me/");
-    localStorage.setItem("rv_role", me.role);
+    try {
+      // pedir token
+      const { data: tok } = await api.post("/auth/token/", {
+        username,
+        password,
+      });
+      localStorage.setItem("rv_token", tok.access);
 
-    if (me.role === "ADMIN") window.location.href = "/admin";
-    else if (me.role === "STAFF") window.location.href = "/staff";
-    else window.location.href = "/";
-  } catch (err) {           // <-- cambia el nombre aquí
-    console.error(err);
-    setErr("Usuario/contraseña inválidos");
-  }
-};
+      // pedir perfil para rol
+      const { data: me } = await api.get("/auth/me/");
+      localStorage.setItem("rv_role", me.role);
+
+      if (me.role === "ADMIN") window.location.href = "/admin";
+      else if (me.role === "STAFF") window.location.href = "/staff";
+      else window.location.href = "/";
+    } catch (e) {
+      console.error(e); // opcional: log para debug
+      setError("Usuario o contraseña inválidos.");
+      }
+  };
 
   return (
-    <div className="login">
-      <h2>RutaViva – Iniciar sesión</h2>
-      <form onSubmit={submit}>
-        <input placeholder="usuario" value={u} onChange={e=>setU(e.target.value)} required/>
-        <input placeholder="contraseña" type="password" value={p} onChange={e=>setP(e.target.value)} required/>
-        <button>Ingresar</button>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2>RutaViva</h2>
+        <p>Inicia sesión para continuar</p>
+
+        {error && <div className="error">{error}</div>}
+
+        <input
+          type="text"
+          placeholder="Usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Ingresar</button>
       </form>
-      {err && <p style={{color:'red'}}>{err}</p>}
-      <small>API: {baseURL}</small>
     </div>
   );
 }
