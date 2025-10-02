@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
-import ClientDashboard from "./pages/client/ClientDashboard.jsx";
+import {ClientDashboard} from "./pages/client/ClientDashboard.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import StaffDashboard from "./pages/staff/StaffDashboard.jsx";
 
