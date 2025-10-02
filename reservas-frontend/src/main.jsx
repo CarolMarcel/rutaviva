@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
-import {ClientDashboard} from "./pages/client/ClientDashboard.jsx";
-import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
-import StaffDashboard from "./pages/staff/StaffDashboard.jsx";
+import {ClientDashboard} from ".reservas-frontend/src/pages/admin/AdminDashboard.jsx";
+import AdminDashboard from ".reservas-frontend/src/pages/client/ClientDashboard.jsx";
+import StaffDashboard from ".reservas-frontend/src/pages/staff/StaffDashboard.jsx";
 
 const Private = ({ children, roles }) => {
   const token = localStorage.getItem("rv_token");
