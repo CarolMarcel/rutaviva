@@ -49,8 +49,8 @@ export const AuthAPI = {
 
 // Tours/Eventos públicos
 export const ToursAPI = {
-  list: (params) => api.get("/tours/", { params }),
-  get: (id) => api.get(`/tours/${id}/`),
+  list: () => api.get("/tours/"),
+  //get: (id) => api.get(`/tours/${id}/`),
 
   // Alias para no tocar MyReservations.jsx
   myReservations: () => ReservationsAPI.listMine(),
@@ -59,8 +59,10 @@ export const ToursAPI = {
 // Reservas
 export const ReservationsAPI = {
   create: (payload) => api.post("/reservations/", payload),
-  listMine: () => api.get("/reservations/me/"),
-  cancel: (id) => api.post(`/reservations/${id}/cancel/`),
+  listMine: () => api.get("/reservations/"),
+  approve: (id) => api.post(`/reservations/${id}/approve/`),
+  reject: (id) => api.post(`/reservations/${id}/reject/`),
+  //cancel: (id) => api.post(`/reservations/${id}/cancel/`),
 
   // Ajusta si tu backend confirma por POST body {token} o por /confirm/<token>/
   confirm: (token) => api.post("/reservations/confirm/", { token }),
