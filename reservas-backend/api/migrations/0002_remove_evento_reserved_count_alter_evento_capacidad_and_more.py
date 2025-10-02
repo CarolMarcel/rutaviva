@@ -52,6 +52,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AddConstraint(
             model_name='reserva',
-            constraint=models.CheckConstraint(condition=models.Q(('cantidad__gt', 0)), name='reserva_cantidad_gt_0'),
+            constraint=models.CheckConstraint(check=models.Q(('cantidad__gt', 0)), name='reserva_cantidad_gt_0'),
         ),
     ]
