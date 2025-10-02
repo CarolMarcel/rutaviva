@@ -1,9 +1,12 @@
-from rest_framework.permissions import BasePermission
+from rest_framework.permissions import BasePermission, SAFE_METHODS
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and hasattr(request.user, "perfil") and request.user.perfil.rol == "admin")
+        u = request.user
+        return bool(u and u.is_authenticated and getattr(u, 'profile', None) and u.profile.role == 'ADMIN')
 
-class IsColaborador(BasePermission):
+class IsStaff(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and hasattr(request.user, "perfil") and request.user.perfil.rol == "colaborador")
+        u = request.user
+        return bool(u and u.is_authenticated and getattr(u, 'profile', None) and u.profile.role in ('ADMIN','STAFF'))
+

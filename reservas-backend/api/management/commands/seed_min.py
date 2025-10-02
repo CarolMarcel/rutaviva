@@ -20,4 +20,3 @@ urlpatterns = [
     path('api/reservations/confirm/<str:token>/', confirm_reservation),
     path('api/auth/', include('rest_framework_simplejwt.urls')),  # /api/auth/token/ y /api/auth/token/refresh/
 ]
-
