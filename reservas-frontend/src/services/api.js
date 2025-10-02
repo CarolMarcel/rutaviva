@@ -1,7 +1,9 @@
 // src/services/api.js
 import axios from "axios";
 
-export const baseURL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000/api";
+// Toma VITE_API_URL (sin slash final) y construye /api siempre
+const API_ROOT = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000").replace(/\/$/, "");
+export const baseURL = `${API_ROOT}/api`;
 
 const api = axios.create({
   baseURL,
@@ -26,7 +28,7 @@ api.interceptors.response.use(
     const status = error?.response?.status;
     if (status === 401 || status === 403) {
       localStorage.removeItem("rv_token");
-      // Opcional: window.location.href = "/login";
+      // window.location.href = "/login"; // opcional
     }
     return Promise.reject(error);
   }
@@ -50,7 +52,7 @@ export const ToursAPI = {
   list: (params) => api.get("/tours/", { params }),
   get: (id) => api.get(`/tours/${id}/`),
 
-  // Alias para no tocar MyReservations.jsx (usa ReservationsAPI internamente)
+  // Alias para no tocar MyReservations.jsx
   myReservations: () => ReservationsAPI.listMine(),
 };
 
@@ -60,8 +62,7 @@ export const ReservationsAPI = {
   listMine: () => api.get("/reservations/me/"),
   cancel: (id) => api.post(`/reservations/${id}/cancel/`),
 
-  // Confirma reserva desde link de correo
-  // Ajusta la ruta según tu backend: body { token } o /confirm/<token>/
+  // Ajusta si tu backend confirma por POST body {token} o por /confirm/<token>/
   confirm: (token) => api.post("/reservations/confirm/", { token }),
 };
 
