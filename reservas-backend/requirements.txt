@@ -9,4 +9,6 @@ gunicorn==21.2.0
 
 # Para servir archivos estáticos en producción
 whitenoise==6.7.0
+dj-database-url==2.2.0
+
 
